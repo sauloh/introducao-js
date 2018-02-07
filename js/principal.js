@@ -2,11 +2,6 @@ var titulo = document.querySelector(".titulo"); // Get Title
 
 titulo.textContent = "Aparecida Nutricionista"; // Update Title
 
-// Error Messages
-var altura_error = "Altura invalida;";
-var peso_error = "Peso invalido";
-
-
 var pacient_list = document.querySelectorAll(".paciente"); // Get pacient
 
 for (var i=0; i<pacient_list.length; i++) {
@@ -17,30 +12,7 @@ for (var i=0; i<pacient_list.length; i++) {
     var altura = paciente.querySelector(".info-altura").textContent; // Get height
     var tdimc = paciente.querySelector(".info-imc");
 
-    tdimc.textContent = '';
-
-    // Height check
-    if (altura <= 0 || altura >= 3) {
-        tdimc.textContent = altura_error;
-        error = true;
-    }
-
-    // Weight check
-    if (peso <= 0 || peso >= 1000) {
-        tdimc.textContent += peso_error;
-        error = true;
-    }
-
-    // Print if errors
-    if (!error) {
-        imc_value = peso / (altura * altura); // Calculates IMC
-        tdimc.textContent = imc_value.toFixed(2); // Update IMC value
-    }
-
-    // Print if Ok
-    else{
-        paciente.classList.add("invalid-pacient")
-    }
+    tdimc.textContent = calcImc(peso, altura);
 }
 
 // +++ Buttom Function - Adding new pacient +++ //
@@ -79,6 +51,7 @@ addButtom.addEventListener("click", function () {
     weightTd.textContent = weight;
     heightTd.textContent = height;
     fatTd.textContent = fat;
+    imcTd.textContent = calcImc(weight, height);
 
     pacientTr.appendChild(nameTd);
     pacientTr.appendChild(weightTd);
@@ -93,3 +66,34 @@ addButtom.addEventListener("click", function () {
     console.log(pacientTr);
 
 })
+
+function calcImc(peso, altura){
+  // Error Messages
+  var altura_error = "Altura invalida;";
+  var peso_error = "Peso invalido";
+  var imc = 0
+
+    // Height check
+    if (altura <= 0 || altura >= 3) {
+        imc = altura_error;
+        error = true;
+    }
+
+    // Weight check
+    if (peso <= 0 || peso >= 1000) {
+        imc += peso_error;
+        error = true;
+    }
+
+    // Print if errors
+    if (!error) {
+        imc_value = peso / (altura * altura); // Calculates IMC
+        imc = imc_value.toFixed(2); // Update IMC value
+    }
+
+    // Print if Ok
+    else{
+        paciente.classList.add("invalid-pacient");
+    }
+    return imc;
+}
