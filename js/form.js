@@ -36,6 +36,56 @@ function createEntry(patient){
   return entry;
 }
 
+function validateWeight(weight) {
+    // Weight check
+    if (weight <= 0 || weight >= 1000) {
+        return false;
+    } else {
+      return true;
+    }
+}
+
+function validateHeight(height){
+    // Height check
+    if (height <= 0 || height >= 3) {
+        return false;
+    } else {
+      return true;
+    }
+}
+
+function validatePatientData(patient){
+  var errors = [];
+
+  if (patient.name.length == 0) errors.push("Name can't be empty");
+  if (patient.fat == 0) errors.push("Fat can't be empty");
+
+  if (patient.weight.length == 0){
+    errors.push("Weight cant' be empty");
+  } else {
+      if (!validateWeight(patient.weight)) errors.push("Invalid Weight");
+  }
+
+  if (patient.height == 0){
+    errors.push("Height can't be empty");
+  } else{
+    if (!validateHeight(patient.height)) errors.push("Invalid Height");
+  }
+
+  return errors;
+}
+
+function printErrors(errors){
+    var list = document.querySelector("#mensagens-erro");
+    list.innerHTML = "";
+
+    errors.forEach(function(error) {
+        var item = document.createElement("li");
+        item.textContent = error;
+        list.appendChild(item);
+    });
+}
+
 // Add new patient from form on Click
 var addButtom = document.querySelector("#adicionar-paciente");
 addButtom.addEventListener("click", function () {
@@ -43,19 +93,27 @@ addButtom.addEventListener("click", function () {
 
     // Get input form data
     var form = document.querySelector("#form-adiciona");
+
     // Save form data to an object
     var patient = getPatientForm(form);
 
-    // Create new table entry with patient data
-    var newEntry = createEntry(patient);
+    errors = validatePatientData(patient);
 
-    // Seclect current table
-    var patientTable = document.querySelector("#tabela-pacientes");
+    if (errors.length > 0) {
+      printErrors(errors);
+    } else{
+      // Create new table entry with patient data
+      var newEntry = createEntry(patient);
 
-    // Add new entry to existing table
-    patientTable.appendChild(newEntry);
+      // Seclect current table
+      var patientTable = document.querySelector("#tabela-pacientes");
 
-    // Clear form after patient added to table
-    form.reset();
+      // Add new entry to existing table
+      patientTable.appendChild(newEntry);
+
+      // Clear form and errors after patient added to table
+      form.reset();
+      document.querySelector("#mensagens-erro").innerHTML = "";
+    }
 
 })
