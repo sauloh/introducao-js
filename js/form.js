@@ -97,7 +97,7 @@ addButtom.addEventListener("click", function () {
     // Save form data to an object
     var patient = getPatientForm(form);
 
-    errors = validatePatientData(patient);
+    var errors = validatePatientData(patient);
 
     if (errors.length > 0) {
       printErrors(errors);
