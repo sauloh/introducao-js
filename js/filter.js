@@ -1,13 +1,14 @@
 var filterField = document.querySelector("#filter-table");
-var patients = document.querySelectorAll(".paciente");
 
 filterField.addEventListener("input", function(){
+    var patients = document.querySelectorAll(".paciente");
+
     patients.forEach(function(p){
         var currName = p.querySelector('.info-nome').textContent;
         var filterBy = filterField.value;
+        var substr = new RegExp(filterBy, 'i');
 
-        if(filterBy == currName){
-            console.log("Equal!");
+        if(substr.test(currName)){
             p.classList.remove("invisible");
         }
 

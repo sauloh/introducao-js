@@ -27,7 +27,7 @@ function createEntry(patient){
   entry.classList.add("paciente");
 
   // Create each column of table and append to table
-  entry.appendChild(createCol(patient.name, "info-name"))
+  entry.appendChild(createCol(patient.name, "info-nome"))
   entry.appendChild(createCol(patient.weight, "info-peso"))
   entry.appendChild(createCol(patient.height, "info-altura"))
   entry.appendChild(createCol(patient.fat, "info-gordura"))
