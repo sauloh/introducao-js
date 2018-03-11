@@ -146,3 +146,19 @@ button[disabled=disabled], button:disabled {
    opacity: 0;
     transition: 0.08s;
 }
+
+#filter-table{
+    width: 150px;
+    height: 25px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+#label{
+    font-weight: bold;
+    float: left;
+}
+
+.invisible{
+    display: none;
+}
