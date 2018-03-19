@@ -88,7 +88,7 @@ function printErrors(errors){
 
 // Add new patient from form on Click
 var addButtom = document.querySelector("#adicionar-paciente");
-addButtom.addEventListener("click", function () {
+addButtom.addEventListener("click", function (event) {
     event.preventDefault();
 
     // Get input form data
