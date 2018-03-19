@@ -86,6 +86,18 @@ function printErrors(errors){
     });
 }
 
+function addPatient(patient){
+      // Create new table entry with patient data
+      var newEntry = createEntry(patient);
+
+      // Seclect current table
+      var patientTable = document.querySelector("#tabela-pacientes");
+
+      // Add new entry to existing table
+      patientTable.appendChild(newEntry);
+
+}
+
 // Add new patient from form on Click
 var addButtom = document.querySelector("#adicionar-paciente");
 addButtom.addEventListener("click", function (event) {
@@ -102,14 +114,7 @@ addButtom.addEventListener("click", function (event) {
     if (errors.length > 0) {
       printErrors(errors);
     } else{
-      // Create new table entry with patient data
-      var newEntry = createEntry(patient);
-
-      // Seclect current table
-      var patientTable = document.querySelector("#tabela-pacientes");
-
-      // Add new entry to existing table
-      patientTable.appendChild(newEntry);
+      addPatient(patient);
 
       // Clear form and errors after patient added to table
       form.reset();
